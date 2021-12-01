@@ -5,7 +5,7 @@ namespace CMS_PHP\Controllers;
 class Homepage
 {
     private $views = "./Views/";
-    private $users_repo;d
+    private $users_repo;
 
     public function __construct($repo)
     {
@@ -14,7 +14,7 @@ class Homepage
 
     public function check()
     {
-        if($_SESSION && $this->login_repo->check_id($_SESSION["id"]))
+        if($_SESSION && $this->users_repo->check_id($_SESSION["id"]))
         {
             require_once $this->views."Backoffice.php";
             return;

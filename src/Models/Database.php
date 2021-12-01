@@ -1,9 +1,6 @@
 <?php
 
 namespace CMS_PHP\Models;
-/**
- * Fichier de configuration pour connexion avec la base
- **/
 
 use \PDO;
 
