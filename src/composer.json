@@ -1,0 +1,18 @@
+{
+  "name": "gravity/cms-php",
+  "authors": [
+    {
+      "name": "cms-php",
+      "email": "romain.feregotto@gmail.com"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "psr-4": {
+      "CMS_PHP\\": "./"
+    }
+  },
+  "description": "RENDU COURS CMS"
+}

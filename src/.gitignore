@@ -1,0 +1,5 @@
+src/composer.lock
+src/vendor
+.idea
+database/ib_logfile0
+./DS_Store*
