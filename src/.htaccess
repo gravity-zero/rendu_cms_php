@@ -6,4 +6,4 @@ RewriteEngine On
 # Rediriger toutes les requêtes vers le Front Controller
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?$1 [NC,L]
+RewriteRule ^(.*)$ index.php/$1 [NC,L]

@@ -22,7 +22,11 @@ class ComposerStaticInitcc3b1af437f05642094856c4da598d65
 
     public static $classMap = array (
         'CMS_PHP\\Controllers\\Articles' => __DIR__ . '/../..' . '/Controllers/Articles.php',
+        'CMS_PHP\\Controllers\\DotEnv' => __DIR__ . '/../..' . '/Controllers/DotEnv.php',
+        'CMS_PHP\\Controllers\\Homepage' => __DIR__ . '/../..' . '/Controllers/Homepage.php',
         'CMS_PHP\\Controllers\\Router' => __DIR__ . '/../..' . '/Controllers/Router.php',
+        'CMS_PHP\\Models\\Database' => __DIR__ . '/../..' . '/Models/Database.php',
+        'CMS_PHP\\Models\\Users' => __DIR__ . '/../..' . '/Models/Users.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

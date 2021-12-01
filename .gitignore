@@ -4,3 +4,4 @@ src/vendor
 database/ib_logfile0
 database/
 ./DS_Store*
+src/.env

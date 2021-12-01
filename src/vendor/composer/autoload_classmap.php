@@ -7,6 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CMS_PHP\\Controllers\\Articles' => $baseDir . '/Controllers/Articles.php',
+    'CMS_PHP\\Controllers\\DotEnv' => $baseDir . '/Controllers/DotEnv.php',
+    'CMS_PHP\\Controllers\\Homepage' => $baseDir . '/Controllers/Homepage.php',
     'CMS_PHP\\Controllers\\Router' => $baseDir . '/Controllers/Router.php',
+    'CMS_PHP\\Models\\Database' => $baseDir . '/Models/Database.php',
+    'CMS_PHP\\Models\\Users' => $baseDir . '/Models/Users.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );
