@@ -9,9 +9,11 @@ class Router
     private $routes = [];
     private $namedRoutes = [];
     private $route;
+    public $renderer;
 
-    public function __construct($url){
+    public function __construct($url, $renderer){
         $this->url = $url;
+        $this->renderer = $renderer;
     }
 
     public function get($path, $callable, $name = null){
@@ -47,7 +49,8 @@ class Router
         }
         //TODO
         //REQUIRE PAGE ERREUR
-        throw new RouterException('No matching routes');
+        //throw new RouterException('No matching routes');
+        $this->renderer->login();
     }
 
     public function url($name, $params = []){

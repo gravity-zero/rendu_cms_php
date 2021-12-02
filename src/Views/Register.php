@@ -12,7 +12,7 @@
     <label for="password">Password:</label>
     <input type="password" name="password" id="password">
     <label for="verify_password">Verify Password</label>
-    <input type="verify_password" name="verify_password" id="verify_password">
-    <button type="submit" name="register">Register</button>
+    <input type="password" id="verify_password">
+    <button type="submit">Register</button>
     <a href="Login.php">if you're already register click here</a>
 </form>

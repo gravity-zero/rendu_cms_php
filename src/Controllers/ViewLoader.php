@@ -2,21 +2,21 @@
 
 namespace CMS_PHP\Controllers;
 
-class Homepage
+class ViewLoader
 {
     private $views = "./Views/";
 
-    public function check()
+    public function user_office()
     {
-        require_once $this->views."Backoffice.php";
+        require_once $this->views."UserOffice.php";
     }
 
-    private function login_page()
+    private function login()
     {
         require_once $this->views."Login.php";
     }
 
-    public function register_page()
+    public function register()
     {
         require_once $this->views."Register.php";
     }
@@ -25,5 +25,10 @@ class Homepage
     {
         require_once $this->views."Error.php";
 
+    }
+
+    public function homepage()
+    {
+        require_once $this->views."Homepage.php";
     }
 }
