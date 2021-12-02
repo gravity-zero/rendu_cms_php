@@ -31,7 +31,8 @@ class Route {
     }
 
     public function call(){
-        return call_user_func_array($this->callable, $this->matches);
+        if(call_user_func_array($this->callable, $this->matches)) return true;
+        return false;
     }
 
 }

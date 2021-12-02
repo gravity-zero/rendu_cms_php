@@ -5,21 +5,10 @@ namespace CMS_PHP\Controllers;
 class Homepage
 {
     private $views = "./Views/";
-    private $users_repo;
-
-    public function __construct($repo)
-    {
-        $this->users_repo = $repo;
-    }
 
     public function check()
     {
-        if($_SESSION && $this->users_repo->check_id($_SESSION["id"]))
-        {
-            require_once $this->views."Backoffice.php";
-            return;
-        }
-        return $this->login_page();
+        require_once $this->views."Backoffice.php";
     }
 
     private function login_page()
@@ -30,5 +19,11 @@ class Homepage
     public function register_page()
     {
         require_once $this->views."Register.php";
+    }
+    
+    public function error($errors)
+    {
+        require_once $this->views."Error.php";
+
     }
 }

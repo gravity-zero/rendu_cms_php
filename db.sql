@@ -25,10 +25,10 @@ USE `CMS_MVC`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Table structure for table `UsersRepo`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -42,9 +42,9 @@ CREATE TABLE `Users` (
 --
 
 --
--- Indexes for table `Users`
+-- Indexes for table `UsersRepo`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -52,9 +52,9 @@ ALTER TABLE `Users`
 --
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT for table `UsersRepo`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

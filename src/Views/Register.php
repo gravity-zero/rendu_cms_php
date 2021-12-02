@@ -1,7 +1,7 @@
 <?php
 ?>
 
-<form method="post">
+<form method="post" action="/submit_register_form">
     <label for="firstname">Firstname:</label>
     <input type="text" name="firstname" id="firstname">
     <label for="lastname">Lastname:</label>

@@ -11,7 +11,8 @@
   },
   "autoload": {
     "psr-4": {
-      "CMS_PHP\\": "./"
+      "CMS_PHP\\": "./",
+      "ASSETS\\": "./Libraries"
     }
   },
   "description": "RENDU COURS CMS"
