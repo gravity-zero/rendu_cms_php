@@ -28,8 +28,10 @@
             </form>
 
             <div class="text-end">
+                <?php if(!$_SESSION["id"]): ?>
                 <a href="/login" class="btn btn-outline-light me-2">Login</a>
                 <a href="/register" class="btn btn-warning">Sign-up</a>
+                <?php endif ?>
                 <?php if($_SESSION["id"]): ?>
                     <a class="btn btn-outline-light me-2" href="#">Admin</a>
                     <a class="btn btn-warning" href="/login">Logout</a>
