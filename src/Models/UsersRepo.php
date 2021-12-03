@@ -55,6 +55,13 @@ class UsersRepo
 
     }
 
+    public function user_log($email)
+    {
+        $stmt = $this->db->connection->prepare("SELECT id, email, password, admin FROM CMS_MVC.users WHERE email = '".$email."'");
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function select_users()
     {
         $stmt = $this->db->connection->prepare("SELECT id, firstname, lastname, email, admin FROM CMS_MVC.users ORDER BY id DESC LIMIT 50");
