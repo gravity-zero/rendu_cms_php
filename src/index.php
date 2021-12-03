@@ -22,8 +22,9 @@ $router->get("/login", [$renderer, "login"]);
 $router->post("/login_check", [$user_controller, "login_verify"]);
 $router->get("/users", [$user_controller, "get_users"]);
 $router->get("/user/:id", [$user_controller, "get_user"]);
-$router->post("/delete_user/:id", [$user_controller, ""]);
+$router->get("/delete_user/:id", [$user_controller, "delete_user"]);
 $router->post("/update_user/:id", [$user_controller, ""]);
+$router->get("/logout", [$user_controller, "logout"]);
 $router->get("error", [$renderer, "error"]);
 /*Content Part*/
 $router->get("/articles", []);

@@ -92,7 +92,12 @@ class Users
 
     public function delete_user($id)
     {
-        if($id) $this->users_repo->delete($id);
+        if($id){
+            $this->users_repo->delete($id);
+            $this->renderer->homepage();
+            if($id === $_SESSION["id"]) $this->logout();
+        }
+
     }
 
     private function set_error($message)
