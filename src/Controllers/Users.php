@@ -13,7 +13,6 @@ class Users
     {
         $this->users_repo = $repo;
         $this->renderer = $renderer;
-
     }
 
     private function set_user_session($id)
@@ -33,7 +32,7 @@ class Users
         {
             if($_POST["email"] && $_POST["password"])
             {
-                $this->users_repo->get($_POST["email"]);
+                var_dump($this->users_repo->get($_POST["email"]));
             }
         }
     }
@@ -86,7 +85,8 @@ class Users
     private function set_error($message)
     {
         $this->errors []= $message;
-            $this->errors = array_unique($this->errors, SORT_STRING );
+        // On évite les doublons (datas_checkeur peut retourner plusieurs erreurs pour plusieurs tests échoué sur la même donnée)
+        $this->errors = array_unique($this->errors, SORT_STRING );
     }
 
     public function get_user($id)
@@ -96,12 +96,13 @@ class Users
 
     public function get_users()
     {
-        $users = $this->users_repo->select();
+        $users = $this->users_repo->select_users();
         return $this->renderer->users_list($users);
     }
 
-    public function logout($id)
+    public function logout()
     {
-        if($id) session_destroy();
+        if($_SESSION["id"]) session_destroy();
+        return $this->renderer->homepage();
     }
 }
