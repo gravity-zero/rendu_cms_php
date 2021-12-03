@@ -11,7 +11,7 @@ class ViewLoader
         require_once $this->views."UserOffice.php";
     }
 
-    private function login()
+    public function login()
     {
         require_once $this->views."Login.php";
     }

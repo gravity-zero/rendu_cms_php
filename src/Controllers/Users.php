@@ -32,9 +32,22 @@ class Users
         {
             if($_POST["email"] && $_POST["password"])
             {
-                var_dump($this->users_repo->get($_POST["email"]));
+                $user = $this->users_repo->user_log($_POST["email"]);
+                if(is_array($user))
+                {
+                    if(password_verify($_POST["password"], $user["password"]))
+                    {
+                        $this->set_user_session($user["id"]);
+                        return $this->renderer->Homepage();
+                    }
+                    $this->set_error("Un petit problème de mot de passe ?!");
+                }else{
+                    $this->set_error("Utilisateur inconnu");
+                }
             }
         }
+        $this->set_error("Le formulaire est vide");
+        return $this->renderer->error($this->errors);
     }
 
     public function register_form()
@@ -77,9 +90,9 @@ class Users
         return $this->renderer->Homepage();
     }
 
-    public function delete_user()
+    public function delete_user($id)
     {
-        if($_SESSION['id']) $this->users_repo->delete($_SESSION['id']);
+        if($id) $this->users_repo->delete($id);
     }
 
     private function set_error($message)
@@ -91,7 +104,8 @@ class Users
 
     public function get_user($id)
     {
-        //if($id)
+        $user = $this->users_repo->select_user($id);
+        return $this->renderer->users_list($user); // A mettre dans une autre vue
     }
 
     public function get_users()
