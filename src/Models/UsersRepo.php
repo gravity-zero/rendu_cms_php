@@ -2,6 +2,8 @@
 
 namespace CMS_PHP\Models;
 
+use \PDO;
+
 class UsersRepo
 {
     private $db;
@@ -53,14 +55,14 @@ class UsersRepo
 
     }
 
-    public function select()
+    public function select_users()
     {
-        $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users ORDER BY id DESC LIMIT 50");
+        $stmt = $this->db->connection->prepare("SELECT id, firstname, lastname, email, admin FROM CMS_MVC.users ORDER BY id DESC LIMIT 50");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get_user($email)
+    public function select_user($email)
     {
         $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users WHERE email= '".$email."'");
         $stmt->execute();
