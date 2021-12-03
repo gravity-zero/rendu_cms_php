@@ -14,27 +14,32 @@ class UsersRepo
     public function check_id($id)
     {
         $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users WHERE id = $id");
-        $stmt->query();
-        $count = $stmt->fetchColumn();
+        $stmt->execute();
 
-        if($count > 0) return true;
+        if($stmt->rowCount() > 0) return true;
+        return false;
+    }
+
+    public function user_exists($email)
+    {
+        $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users WHERE email = '".$email."'");
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0) return true;
         return false;
     }
 
     public function register($infos)
-    { // Ajouter un contrôle sur l'email
-        if(!$_SESSION["id"] || !$this->check_id($_SESSION["id"])){
+    {
             $stmt = $this->db->connection->prepare("INSERT INTO CMS_MVC.users (firstname, lastname, email, password) VALUES (:firstname, :lastname, :email, :password)");
             $stmt->execute([
                 "firstname" => htmlspecialchars($infos["firstname"]),
                 "lastname" => htmlspecialchars($infos["lastname"]),
                 "email" => htmlspecialchars($infos["email"]),
-                "password" => htmlspecialchars($infos["password"])
+                "password" => htmlspecialchars(password_hash($infos["password"], PASSWORD_DEFAULT))
             ]);
 
             return $this->db->connection->lastInsertId();
-        }
-        return false;
     }
 
     public function delete($id)
@@ -52,7 +57,14 @@ class UsersRepo
     {
         $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users ORDER BY id DESC LIMIT 50");
         $stmt->execute();
-        return $stmt->FETCH_ASSOC();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function get_user($email)
+    {
+        $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users WHERE email= '".$email."'");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

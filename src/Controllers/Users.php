@@ -26,6 +26,17 @@ class Users
         if($_SESSION["id"] && $this->users_repo->check_id($_SESSION["id"])) $this->renderer->login();
         $this->renderer->Homepage();
     }
+    
+    public function login_verify()
+    {
+        if($_POST)
+        {
+            if($_POST["email"] && $_POST["password"])
+            {
+                $this->users_repo->get
+            }
+        }
+    }
 
     public function register_form()
     {
@@ -43,11 +54,14 @@ class Users
 
             if(!is_array($isCorrectDatas))
             {
-                $user_id = $this->users_repo->register($_POST);
+                if(!$_SESSION["id"] && !$this->users_repo->user_exists(htmlspecialchars($_POST["email"])))
+                {
+                    $user_id = $this->users_repo->register($_POST);
 
-                if(is_int($user_id)) $this->set_user_session($user_id);
-                $this->check();
-
+                    if(is_int($user_id)) $this->set_user_session($user_id);
+                    return $this->check();
+                }
+                $this->set_error("Un compte existe déjà pour cette adresse e-mail !");
             } else {
                 foreach($isCorrectDatas as $errors)
                 {
@@ -58,6 +72,7 @@ class Users
                 }
             }
         }
+
         if(count($this->errors) > 0) return $this->renderer->error($this->errors);
 
         return $this->renderer->Homepage();
