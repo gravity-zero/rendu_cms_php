@@ -13,7 +13,7 @@ class Users
     {
         $this->users_repo = $repo;
         $this->renderer = $renderer;
-        
+
     }
 
     private function set_user_session($id)
@@ -26,14 +26,14 @@ class Users
         if($_SESSION["id"] && $this->users_repo->check_id($_SESSION["id"])) $this->renderer->login();
         $this->renderer->Homepage();
     }
-    
+
     public function login_verify()
     {
         if($_POST)
         {
             if($_POST["email"] && $_POST["password"])
             {
-                $this->users_repo->get
+                $this->users_repo->get($_POST["email"]);
             }
         }
     }
