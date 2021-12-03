@@ -20,7 +20,7 @@ class ViewLoader
     {
         require_once $this->views."Register.php";
     }
-    
+
     public function error($errors)
     {
         require_once $this->views."Error.php";

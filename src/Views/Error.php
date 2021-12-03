@@ -10,7 +10,7 @@
     <body>
         <h1>Ceci est une page d'erreur</h1>
         <p>Vous allez être redirigez dans environ 5 secondes</p>
-        
+
     </body>
     <script>
             const errors = <?php echo json_encode($errors) ?>;
@@ -21,7 +21,7 @@
 
                 pop_up.params({
                     icon: 'Error',
-                    title: "This is my PopUp Title!",
+                    title: "Une erreur a été rencontrée",
                     html: "<p>"+ errors.map(error => {return '<b>'+ error + '</b>'}).join('<br>') +"</p>",
                     showConfirmButton: true,
                     showDenyButton: false,

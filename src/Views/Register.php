@@ -1,18 +1,37 @@
-<?php
-?>
+<?php require_once "Header.php"?>
+<body class="d-flex justify-content-center align-items-center" style="height: 100vh">
+    <main class="m-3">
+        <form method="post" action="/submit_register_form">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-<form method="post" action="/submit_register_form">
-    <label for="firstname">Firstname:</label>
-    <input type="text" name="firstname" id="firstname">
-    <label for="lastname">Lastname:</label>
-    <input type="text" name="lastname" id="lastname">
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email">
-    </br>
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
-    <label for="verify_password">Verify Password</label>
-    <input type="password" id="verify_password">
-    <button type="submit">Register</button>
-    <a href="Login.php">if you're already register click here</a>
-</form>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="firstname" placeholder="george">
+                <label for="firstname">Firstname</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="lastname" placeholder="macgregor">
+                <label for="lastname">Lastname</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                <label for="email">Email address</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="verify_password" placeholder="verify">
+                <label for="verify_password">Verify password</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Sign in</button>
+            <a href="./login">if you're already register click here</a>
+        </form>
+    </main>
+</body>
+
