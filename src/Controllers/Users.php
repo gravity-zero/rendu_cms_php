@@ -91,7 +91,8 @@ class Users
 
     public function get_user($id)
     {
-        //if($id)
+        $user = $this->users_repo->select_user($id);
+        return $this->renderer->users_list($user); // A mettre dans une autre vue
     }
 
     public function get_users()

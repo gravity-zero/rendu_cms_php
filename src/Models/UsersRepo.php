@@ -62,9 +62,9 @@ class UsersRepo
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function select_user($email)
+    public function select_user($id)
     {
-        $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users WHERE email= '".$email."'");
+        $stmt = $this->db->connection->prepare("SELECT * FROM CMS_MVC.users WHERE id= $id");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
