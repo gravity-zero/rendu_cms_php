@@ -96,7 +96,8 @@ class Users
 
     public function get_users()
     {
-        $this->users_repo->select();
+        $users = $this->users_repo->select();
+        return $this->renderer->users_list($users);
     }
 
     public function logout($id)

@@ -18,7 +18,7 @@ $router = new Router($_SERVER["REDIRECT_URL"], $renderer);
 $router->get('/', [$user_controller, 'check']);
 $router->get("/register", [$renderer, "register"]);
 $router->post("/submit_register_form", [$user_controller, "register_form"]);
-$router->get("/users", [$user_controller, ""]);
+$router->get("/users", [$user_controller, "get_users"]);
 $router->get("/user/:id", [$user_controller, "get_users"]);
 $router->post("/delete_user/:id", [$user_controller, ""]);
 $router->post("/update_user/:id", [$user_controller, ""]);
