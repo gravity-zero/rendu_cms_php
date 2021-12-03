@@ -90,9 +90,9 @@ class Users
         return $this->renderer->Homepage();
     }
 
-    public function delete_user()
+    public function delete_user($id)
     {
-        if($_SESSION['id']) $this->users_repo->delete($_SESSION['id']);
+        if($id) $this->users_repo->delete($id);
     }
 
     private function set_error($message)

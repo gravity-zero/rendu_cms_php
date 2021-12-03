@@ -33,15 +33,15 @@ class UsersRepo
 
     public function register($infos)
     {
-            $stmt = $this->db->connection->prepare("INSERT INTO CMS_MVC.users (firstname, lastname, email, password) VALUES (:firstname, :lastname, :email, :password)");
-            $stmt->execute([
-                "firstname" => htmlspecialchars($infos["firstname"]),
-                "lastname" => htmlspecialchars($infos["lastname"]),
-                "email" => htmlspecialchars($infos["email"]),
-                "password" => htmlspecialchars(password_hash($infos["password"], PASSWORD_DEFAULT))
-            ]);
+        $stmt = $this->db->connection->prepare("INSERT INTO CMS_MVC.users (firstname, lastname, email, password) VALUES (:firstname, :lastname, :email, :password)");
+        $stmt->execute([
+            "firstname" => htmlspecialchars($infos["firstname"]),
+            "lastname" => htmlspecialchars($infos["lastname"]),
+            "email" => htmlspecialchars($infos["email"]),
+            "password" => htmlspecialchars(password_hash($infos["password"], PASSWORD_DEFAULT))
+        ]);
 
-            return $this->db->connection->lastInsertId();
+        return $this->db->connection->lastInsertId();
     }
 
     public function delete($id)
