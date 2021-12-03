@@ -22,6 +22,7 @@ $router->get("/users", [$user_controller, ""]);
 $router->get("/user/:id", [$user_controller, "get_users"]);
 $router->post("/delete_user/:id", [$user_controller, ""]);
 $router->post("/update_user/:id", [$user_controller, ""]);
+$router->get("error", [$renderer, "error"]);
 /*Content Part*/
 $router->get("/articles", []);
 $router->get("/article/:id", []);

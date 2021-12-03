@@ -8,7 +8,8 @@
         <title>Erreur</title>
     </head>
     <body>
-        
+        <h1>Ceci est une page d'erreur</h1>
+        <p>Vous allez être redirigez dans environ 5 secondes</p>
         
     </body>
     <script>

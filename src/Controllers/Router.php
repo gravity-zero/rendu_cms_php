@@ -50,7 +50,7 @@ class Router
         //TODO
         //REQUIRE PAGE ERREUR
         //throw new RouterException('No matching routes');
-        $this->renderer->login();
+        $this->renderer->homepage();
     }
 
     public function url($name, $params = []){
