@@ -5,7 +5,7 @@
 
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
-                    <label for="email">Firstname</label>
+                    <label for="email">Email</label>
                 </div>
 
                 <div class="form-floating mb-3">
@@ -14,7 +14,7 @@
                 </div>
 
                 <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">Login</button>
-                <a href="./login">if you're not register yet click here</a>
+                <a href="./login">Si vous n'avez pas de compte, cliquez ici</a>
             </form>
         </main>
     </body>

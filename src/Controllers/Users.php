@@ -2,12 +2,15 @@
 
 namespace CMS_PHP\Controllers;
 use ASSETS\Datas_checker;
+use CMS_PHP\Controllers\Config\Jwt_generator;
 
 class Users
 {
     private $users_repo;
     private $renderer;
+    private $admin = false;
     private $errors = [];
+    public $user = [];
 
     public function __construct($repo, $renderer)
     {
@@ -17,13 +20,41 @@ class Users
 
     private function set_user_session($id)
     {
-        if($id) $_SESSION["id"] = $id;
+        if($id)
+        {
+            $_SESSION["id"] = $id;
+            $_SESSION["admin"] = false;
+        }
+    }
+
+    private function set_admin_session($id)
+    {
+        if($id == $_SESSION["id"]) $_SESSION["admin"] = true;
+        $this->admin = true;
     }
 
     public function check()
     {
-        if($_SESSION["id"] && $this->users_repo->check_id($_SESSION["id"])) $this->renderer->login();
-        $this->renderer->Homepage();
+        if($_SESSION["id"] && $this->users_repo->check_id($_SESSION["id"])) return $this->renderer->Homepage();
+        return $this->renderer->login();
+    }
+
+    private function generate_jwt()
+    {
+        $jwt = new Jwt_generator();
+        return $jwt->getJwt($_SESSION["id"]);
+    }
+
+    public function user_profile()
+    {
+        if($_SESSION["id"])
+        {
+            $this->user = $this->users_repo->select_user($_SESSION["id"]);
+            $this->user["token"] = $this->generate_jwt();
+            return $this->renderer->user_office($this->user);
+        }
+        $this->set_error("Merci de vous connecter");
+        return $this->renderer->error($this->errors);
     }
 
     public function login_verify()
@@ -38,6 +69,7 @@ class Users
                     if(password_verify($_POST["password"], $user["password"]))
                     {
                         $this->set_user_session($user["id"]);
+                        if($user["admin"] == 1) $this->set_admin_session($user["id"]);
                         return $this->renderer->Homepage();
                     }
                     $this->set_error("Un petit problème de mot de passe ?!");
@@ -45,6 +77,7 @@ class Users
                     $this->set_error("Utilisateur inconnu");
                 }
             }
+            return $this->renderer->error($this->errors);
         }
         $this->set_error("Le formulaire est vide");
         return $this->renderer->error($this->errors);
@@ -66,12 +99,12 @@ class Users
 
             if(!is_array($isCorrectDatas))
             {
-                if(!$_SESSION["id"] && !$this->users_repo->user_exists(htmlspecialchars($_POST["email"])))
+                if(!$this->users_repo->user_exists(htmlspecialchars($_POST["email"])))
                 {
                     $user_id = $this->users_repo->register($_POST);
 
                     if(is_int($user_id)) $this->set_user_session($user_id);
-                    return $this->check();
+                    return $this->renderer->login();
                 }
                 $this->set_error("Un compte existe déjà pour cette adresse e-mail !");
             } else {
@@ -92,12 +125,11 @@ class Users
 
     public function delete_user($id)
     {
-        if($id){
+        if($id && $id !== $_SESSION["id"])
+        {
             $this->users_repo->delete($id);
-            $this->renderer->homepage();
-            if($id === $_SESSION["id"]) $this->logout();
         }
-
+        return $this->renderer->homepage();
     }
 
     private function set_error($message)

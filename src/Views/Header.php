@@ -18,10 +18,13 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="./Homepage" class="nav-link px-2 text-white">Home</a></li>
-                <li><a href="/submit_article" class="nav-link px-2 text-white">Write article</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Posts API</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Comments API</a></li>
-                <li><a href="/users" class="nav-link px-2 text-white">Users List</a></li>
+                <li><a href="/submit_article" class="nav-link px-2 text-white">Ecrire un article</a></li>
+                <li><a href="/user_office" class="nav-link px-2 text-white">Votre compte</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">API Article</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">API Commentaires</a></li>
+                <?php if($_SESSION["admin"]): ?>
+                    <li><a href="/users" class="nav-link px-2 text-white">Users List</a></li>
+                <?php endif ?>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -29,12 +32,14 @@
             </form>
 
             <div class="text-end">
-                <?php if(count($_SESSION) == 0 || !$_SESSION["id"]): ?>
+                <?php if(!$_SESSION["id"]): ?>
                     <a href="/login" class="btn btn-outline-light me-2">Login</a>
                     <a href="/register" class="btn btn-warning">Sign-up</a>
-                <?php endif ?>
+                    <?php endif ?>
                 <?php if($_SESSION["id"]): ?>
-                    <a class="btn btn-outline-light me-2" href="#">Admin</a>
+                    <?php if($_SESSION["admin"]): ?>
+                        <a class="btn btn-outline-light me-2" href="#">Admin</a>
+                    <?php  endif ?>
                     <a class="btn btn-warning" href="/logout">Logout</a>
                 <?php endif ?>
             </div>

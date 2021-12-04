@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS_PHP\Controllers;
+namespace CMS_PHP\Controllers\Routing;
 
 class Route {
 

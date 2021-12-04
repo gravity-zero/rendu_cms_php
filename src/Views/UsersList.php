@@ -1,4 +1,4 @@
-
+<?php require_once "Header.php" ?>
 
 <?
 
@@ -32,8 +32,6 @@ $table.= "</table>";
 ?>
 <section class="container mt-5">
     <div class="table-responsive">
-        <tbody>
-            <? echo $table ?>
-        </tbody>
+        <?php if($_SESSION["admin"]) echo $table ?>
     </div>
 </section>

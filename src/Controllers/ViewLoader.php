@@ -6,7 +6,7 @@ class ViewLoader
 {
     private $views = "./Views/";
 
-    public function user_office($users)
+    public function user_office($user)
     {
         require_once $this->views."UserOffice.php";
     }
@@ -24,7 +24,6 @@ class ViewLoader
     public function error($errors)
     {
         require_once $this->views."Error.php";
-
     }
 
     public function homepage()
@@ -32,7 +31,7 @@ class ViewLoader
         require_once $this->views."Homepage.php";
     }
 
-    public function users_list($users)
+    public function users_list($user)
     {
         require_once $this->views."UsersList.php";
     }
