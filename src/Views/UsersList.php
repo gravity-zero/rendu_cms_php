@@ -1,5 +1,4 @@
-<?php
-require_once "Header.php"?>
+
 
 <?
 
@@ -20,8 +19,8 @@ foreach ($users as $user)
             if ($key !== "admin"){
                 $table.= "<td>".$value."</td>";
             }else {
-                $checked = $value===1?" checked":"";
-                $table.= "<td><input type='checkbox'.$checked disabled></td>";
+                $checked = $value==1 ?" checked='checked'":"";
+                $table.= "<td><input type='checkbox' ".$checked." disabled></td>";
             }
         }
         $table.= "<td><a href='/delete_user/". $user['id'] ."'>Delete user</a></td>";
