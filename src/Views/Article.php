@@ -1,6 +1,6 @@
 <?php require_once "Header.php" ?>
 <?php if($article): ?>
-    <?php if($_SESSION["admin"] || $_SESSION["id"] == $article["user_id"]):?> <button class="btn btn-primary text-align-center"><a href="/delete_article/<?= $article["id"] ?>"></a>Supprimer l'article</button> <?php endif ?>
+    <?php if($_SESSION["admin"] || $_SESSION["id"] == $article["user_id"]):?> <a href="/delete_article/<?= $article["id"] ?>"><button class="btn btn-primary text-align-center">Supprimer l'article</button></a> <?php endif ?>
     <?php if($_SESSION["admin"] || $_SESSION["id"] == $article["user_id"]):?> <button class="btn btn-primary text-align-center"><a href="/edit_article/<?= $article["id"] ?>"></a>Editer l'article</button> <?php endif ?>
         <section class="album py-5 bg-light">
             <a href="/article/<?= $article['id'] ?>">
