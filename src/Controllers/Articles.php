@@ -6,12 +6,14 @@ use ASSETS\Datas_checker;
 class Articles
 {
     private $article_repo;
+    private $comment_repo;
     private $renderer;
     public $errors;
 
-    function __construct($repo, $renderer)
+    function __construct($repo, $comment_repo, $renderer)
     {
         $this->article_repo = $repo;
+        $this->comment_repo = $comment_repo;
         $this->renderer = $renderer;
     }
 
@@ -54,10 +56,25 @@ class Articles
         return $this->renderer->error($this->errors);
     }
 
+    public function submitComment()
+    {
+        if($_POST){
+            $this->comment_repo->insertArticleComment($_POST);
+            return $this->getArticle($_POST["article_id"]);
+        }
+    }
+
+    public function deleteComment($id)
+    {
+        $this->comment_repo->removeComment($id);
+        return $this->renderer->homepage();
+    }
+
     public function getArticle($id)
     {
         $article = $this->article_repo->article_id($id);
-        return $this->renderer->article($article);
+        $comments = $this->comment_repo->getCommentsArticle($id);
+        return $this->renderer->article($article, $comments);
     }
 
     public function removeArticle($id)

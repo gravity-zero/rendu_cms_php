@@ -48,7 +48,7 @@ class ViewLoader
         require_once $this->views."ArticleForm.php";
     }
 
-    public function article($article)
+    public function article($article, $comments)
     {
         require_once $this->views."Article.php";
     }

@@ -8,7 +8,6 @@ class Users
 {
     private $users_repo;
     private $renderer;
-    private $admin = false;
     private $errors = [];
     public $user = [];
 
@@ -30,7 +29,6 @@ class Users
     private function set_admin_session($id)
     {
         if($id == $_SESSION["id"]) $_SESSION["admin"] = true;
-        $this->admin = true;
     }
 
     public function check()

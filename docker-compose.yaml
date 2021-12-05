@@ -10,6 +10,9 @@ services:
         volumes:
             - ./src:/var/www/html
             - /app
+        depends_on:
+            -   db
+            - composer
 
     db:
         image: mariadb

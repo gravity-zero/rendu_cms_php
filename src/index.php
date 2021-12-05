@@ -47,6 +47,7 @@ $router->get("/edit_article/:id", [$article_controller, ""]);//TODO
 $router->post("/submit_edit_article/:id", [$article_controller, ""]);//TODO
 /*Comment Part*/
 $router->post("/submit_comment", [$article_controller, "submitComment"]);
+$router->get("/delete_comment/:id", [$article_controller, "deleteComment"]);
 
 
 /*API Parts*/

@@ -3,13 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : sam. 04 déc. 2021 à 16:20
+-- Généré le : dim. 05 déc. 2021 à 17:49
 -- Version du serveur : 10.6.5-MariaDB-1:10.6.5+maria~focal
 -- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -50,7 +49,7 @@ CREATE TABLE `comments` (
   `user_id` int(11) NOT NULL,
   `article_id` int(11) NOT NULL,
   `comment` mediumtext NOT NULL,
-  `comment_date` date NOT NULL
+  `comment_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -83,6 +82,7 @@ ALTER TABLE `articles`
 -- Index pour la table `comments`
 --
 ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `article_id` (`article_id`);
 
@@ -100,6 +100,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `articles`
 --
 ALTER TABLE `articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `comments`
+--
+ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
