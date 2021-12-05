@@ -24,12 +24,14 @@ class ArticlesRepo
     {
         $stmt = $this->db->connection->prepare("INSERT INTO CMS_MVC.articles (user_id, title, img_url, content, author, creation_date) VALUES (:user_id, :title, :img_url, :content, :author, NOW())");
         $stmt->execute([
-            "user_id" => $_SESSION["id"],
+            "user_id" => $article["user_id"],
             "title" => htmlspecialchars($article["title"]),
             "img_url" => htmlspecialchars($article["img_url"]),
             "content" => htmlspecialchars($article["content"]),
             "author" => htmlspecialchars($article["author"]),
         ]);
+
+        return $this->db->connection->lastInsertId();
     }
 
     public function article_id($id)

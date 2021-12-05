@@ -33,13 +33,13 @@ class Jwt_generator
 
     private function jwtGenerator($header, $payload) {
         if(is_array($payload)) {
+
             $header = json_encode($header);
             $payload = json_encode($payload);
 
             $header_b64 = $this->sanitizeUrl($header);
             $payload_b64 = $this->sanitizeUrl($payload);
             $signature = $this->sign_hash($header_b64, $payload_b64);
-
             $sign_b64 = $this->sanitizeUrl($signature);
 
             return $header_b64 . "." . $payload_b64 . "." . $sign_b64;

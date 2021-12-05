@@ -2,6 +2,7 @@
 
 namespace CMS_PHP\Controllers;
 use ASSETS\Datas_checker;
+use CMS_PHP\Controllers\Config\Jwt_generator;
 
 class Articles
 {
@@ -23,6 +24,29 @@ class Articles
         return $this->renderer->homepage($articles);
     }
 
+    public function ApiPayload($jwt)
+    {
+        $jwt_parts = explode(".", $jwt);
+        $payload_array = base64_decode($jwt_parts[1]);
+
+        return json_decode($payload_array, true);
+    }
+
+    public function ApiSubmit($jwt_key)
+    {
+        if($_POST){
+            $jwt_gen = new Jwt_generator();
+
+            if($jwt_gen->JwtControl($jwt_key)){
+                $payload = $this->ApiPayload($jwt_key);
+                $_POST["user_id"] = $payload["user_id"];
+
+                $article_id = $this->article_repo->insert_article($_POST);
+                echo json_encode(["success" => ["l'id de votre article" => $article_id]]);
+            }
+        }
+    }
+
     public function submitArticle()
     {
         if($_POST)
@@ -39,6 +63,7 @@ class Articles
 
             if(!is_array($isCorrectDatas))
             {
+                $_POST["user_id"] = $_SESSION["id"];
                 $this->article_repo->insert_article($_POST);
                 return $this->getArticles();
             } else {

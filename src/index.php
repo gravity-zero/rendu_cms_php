@@ -35,7 +35,7 @@ $router->post("update_user_office/:id", [$user_controller, ""]); //TODO
 $router->get("/logout", [$user_controller, "logout"]);
 /*Admin Part*/
 $router->get("/users", [$user_controller, "get_users"]);
-$router->get("/delete_user/:id", [$user_controller, "delete_user"]);
+$router->get("/delete_user/:id", [$user_controller, "delete_user"]); // Valable pour l'Api
 $router->get("/user/:id", [$user_controller, "get_user"]);
 /*Article Part*/
 $router->get("/articles", [$article_controller, 'getArticles']);
@@ -51,14 +51,8 @@ $router->get("/delete_comment/:id", [$article_controller, "deleteComment"]);
 
 
 /*API Parts*/
- /*API User Part*/
-$router->get("/api/:key/users", [$user_controller,]);
-$router->get("/api/:key/user/:id", [$user_controller,]);
-$router->post("/api/:key/user/:id/:action", [$user_controller, "delete_user"]);
-/*API Article Part*/
-$router->get("/api/:key/articles", [$user_controller,]);
-$router->get("/api/:key/article/:id", [$user_controller,]);
-$router->post("/api/:key/article/:id/:action", [$user_controller,]);
+/*Creation d'un article*/
+$router->post("/api/:key/create_article", [$article_controller, "ApiSubmit"]);
 
 $router->run();
 

@@ -40,6 +40,7 @@ class Users
     private function generate_jwt()
     {
         $jwt = new Jwt_generator();
+
         return $jwt->getJwt($_SESSION["id"]);
     }
 
