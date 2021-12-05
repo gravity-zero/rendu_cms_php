@@ -17,8 +17,8 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="./Homepage" class="nav-link px-2 text-white">Home</a></li>
-                <li><a href="/submit_article" class="nav-link px-2 text-white">Ecrire un article</a></li>
+                <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
+                <li><a href="/article_form" class="nav-link px-2 text-white">Ecrire un article</a></li>
                 <li><a href="/user_office" class="nav-link px-2 text-white">Votre compte</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">API Article</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">API Commentaires</a></li>

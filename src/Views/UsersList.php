@@ -23,7 +23,7 @@ foreach ($users as $user)
                 $table.= "<td><input type='checkbox' ".$checked." disabled></td>";
             }
         }
-        $table.= "<td><a href='/delete_user/". $user['id'] ."'>Delete user</a></td>";
+        if($user["id"] !== $_SESSION["id"]) $table.= "<td><a href='/delete_user/". $user['id'] ."'>Delete user</a></td>";
         $table.= "</tr>";
 
 }

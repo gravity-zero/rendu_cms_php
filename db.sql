@@ -36,7 +36,7 @@ CREATE TABLE `articles` (
   `img_url` varchar(255) NOT NULL,
   `content` varchar(255) NOT NULL,
   `author` varchar(255) NOT NULL,
-  `creation_date` date NOT NULL
+  `creation_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

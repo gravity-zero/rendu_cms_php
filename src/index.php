@@ -4,22 +4,25 @@ require_once './vendor/autoload.php';
 session_start();
 
 use CMS_PHP\Controllers\Routing\Router;
-use CMS_PHP\Controllers\Config\{DotEnv, Jwt_generator};
+use CMS_PHP\Controllers\Config\{DotEnv};
 use CMS_PHP\Controllers\{Articles, ViewLoader, Users, Api};
-use CMS_PHP\Models\{Database, UsersRepo};
+use CMS_PHP\Models\{Database, UsersRepo, ArticlesRepo};
 (new DotEnv('.env'))->load();
 // $_SERVER["argc"] contient les données du DOTENV ce qui n'est pas souhaitable
 
 
 $db = new Database(getenv('DB_DNS'), getenv('DB_LOGIN'), getenv('DB_PASS'));
-$renderer = new ViewLoader();
+
+if(getenv("APP_ENV") !== "prod") $renderer = new ViewLoader(); else $renderer = new ViewLoader(getenv('PROD_PATH'));
 $user_rep = new UsersRepo($db);
 $user_controller = new Users($user_rep, $renderer);
+$article_rep = new ArticlesRepo($db);
+$article_controller = new Articles($article_rep, $renderer);
 
 $router = new Router($_SERVER["REDIRECT_URL"], $renderer);
 /*View Part*/
-$router->get('/', [$renderer, 'homepage']);
-$router->get('/homepage', [$renderer, 'homepage']);
+$router->get('/', [$article_controller, 'getArticles']);
+$router->get('/homepage', [$article_controller, 'getArticles']);
 $router->get("/register", [$renderer, "register"]);
 $router->get("/login", [$renderer, "login"]);
 $router->get("error", [$renderer, "error"]);
@@ -34,11 +37,12 @@ $router->get("/users", [$user_controller, "get_users"]);
 $router->get("/delete_user/:id", [$user_controller, "delete_user"]);
 $router->get("/user/:id", [$user_controller, "get_user"]);
 /*Content Part*/
-$router->get("/articles", [$user_controller, 'check']);
-$router->get("/article/:id", []);
-$router->post("/submit_article", []);
-$router->post("/delete_article/:id", []);
-$router->post("/update_article/:id", [$user_controller, ""]);
+$router->get("/articles", [$article_controller, 'getArticles']);
+$router->get("/article/:id", [$article_controller, "getArticle"]);
+$router->get("/article_form", [$renderer, "article_form"]);
+$router->post("/submit_article", [$article_controller, 'submitArticle']);
+$router->post("/delete_article/:id", [$article_controller, "removeArticle"]);
+$router->post("/edit_article/:id", [$article_controller, ""]);
 
 /*API Parts*/
  /*API User Part*/
