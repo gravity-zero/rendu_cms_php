@@ -145,6 +145,12 @@ class Users
             $isCorrectDatas = $datas_control->check([$_POST], $array_control);
             if (!is_array($isCorrectDatas))
             {
+                if(!isset($_POST["admin_mode"])){
+                    $_POST["admin_mode"] = "0";
+                    $_SESSION["admin"] = false;
+                } else {
+                    $this->set_admin_session($_SESSION["id"]);
+                }
                 $this->users_repo->update($_POST);
             } else {
                 foreach ($isCorrectDatas as $errors) {
