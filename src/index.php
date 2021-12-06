@@ -30,8 +30,8 @@ $router->get("/error", [$renderer, "error"]);
 /*User Part*/
 $router->post("/submit_register_form", [$user_controller, "register_form"]);
 $router->post("/login_check", [$user_controller, "login_verify"]);
-$router->get("/user_office", [$user_controller, "user_profile"]); // Pour récupérer la clé API + TODO
-$router->post("update_user_office/:id", [$user_controller, ""]); //TODO
+$router->get("/user_office", [$user_controller, "user_profile"]); // Pour récupérer la clé API
+$router->post("update_user_office", [$user_controller, "update_profile"]); //TODO
 $router->get("/logout", [$user_controller, "logout"]);
 /*Admin Part*/
 $router->get("/users", [$user_controller, "get_users"]);

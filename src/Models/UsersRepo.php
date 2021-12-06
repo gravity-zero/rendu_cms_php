@@ -46,13 +46,20 @@ class UsersRepo
 
     public function delete($id)
     {
-        $stmt = $this->db->connection->prepare("DELETE FROM CMS_MVC.users WHERE id=$id");
-        $stmt->execute();
+        $stmt = $this->db->connection->prepare("DELETE FROM CMS_MVC.users WHERE id=:id");
+        $stmt->execute(["id" => $id]);
     }
 
-    public function update($id)
+    public function update($infos)
     {
-
+        $stmt = $this->db->connection->prepare("UPDATE CMS_MVC.users SET firstname=:firstname, lastname=:lastname,email=:email, admin=:admin WHERE id=:id");
+        $stmt->execute([
+            'firstname' => $infos['firstname'],
+            'lastname' => $infos['lastname'],
+            'email' => $infos['email'],
+            'id' => $infos['user_id'],
+            'admin' => $infos['admin_mode'],
+        ]);
     }
 
     public function user_log($email)

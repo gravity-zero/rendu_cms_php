@@ -44,11 +44,11 @@ class Users
         return $jwt->getJwt($_SESSION["id"]);
     }
 
-    public function user_profile()
+    public function user_profile($id=null)
     {
-        if($_SESSION["id"])
+        if($_SESSION["id"] || $id)
         {
-            $this->user = $this->users_repo->select_user($_SESSION["id"]);
+            $this->user = $this->users_repo->select_user($_SESSION["id"]?:$id);
             $this->user["token"] = $this->generate_jwt();
             return $this->renderer->user_office($this->user);
         }
@@ -129,6 +129,36 @@ class Users
             $this->users_repo->delete($id);
         }
         return $this->renderer->homepage();
+    }
+
+    public function update_profile()
+    {
+        if ($_POST && $_SESSION["id"] == $_POST["user_id"]) {
+            $array_control = [
+                "id" => ["required, is_int", "error_message" => "l'id de l'utilisateur est manquant, vous essayez probablement de tenter une action interdite"],
+                "firstname" => ["is_string", "not_alphanumeric", "lenght_greater" => 2, "error_message" => "Le champs prénom n'est pas correctement renseigné"],
+                "lastname" => ["is_string", "not_alphanumeric", "lenght_greater" => 2, "error_message" => "Le champs nom n'est pas correctement renseigné"],
+                "email" => ["is_string", "is_email", "error_message" => "Le champs email n'est pas pas une adresse e-mail valide"]
+            ];
+
+            $datas_control = new datas_checker();
+            $isCorrectDatas = $datas_control->check([$_POST], $array_control);
+            if (!is_array($isCorrectDatas))
+            {
+                $this->users_repo->update($_POST);
+            } else {
+                foreach ($isCorrectDatas as $errors) {
+                    foreach ($errors as $key => $error) {
+                        //On pourrait composer un message d'erreur plus fin
+                        if ($key == "error_message") $this->set_error($error);
+                    }
+                }
+            }
+        }
+
+        if(count($this->errors) > 0) return $this->renderer->error($this->errors);
+
+        return $this->user_profile();
     }
 
     private function set_error($message)
