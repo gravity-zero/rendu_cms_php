@@ -9,7 +9,7 @@ services:
             - "5000:80"
         volumes:
             - ./src:/var/www/html
-            - /app
+            - /composer
         depends_on:
             -   db
             - composer
@@ -35,8 +35,5 @@ services:
     composer:
         restart: 'no'
         image: composer/composer
-        command:
-        - install
-        - dump-autoload
         volumes:
-            - .:/app
+            - .:/composer
